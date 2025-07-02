@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+
 
 
 [ApiController]
@@ -66,4 +68,13 @@ public class AuthController : ControllerBase
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    [Authorize]
+    [HttpGet("secret")]
+    public IActionResult Secret()
+    {
+        var username = User.Identity.Name;
+        return Ok($"🔒 You are authenticated as: {username}");
+    }
+
 }

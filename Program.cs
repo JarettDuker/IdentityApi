@@ -91,6 +91,12 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+var jwtKey = builder.Configuration["Jwt:Key"];
+Console.WriteLine($"[DEBUG] Jwt Key Length: {jwtKey?.Length}");
+Console.WriteLine($"[DEBUG] Jwt Key Value: {jwtKey}");
+
+
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
